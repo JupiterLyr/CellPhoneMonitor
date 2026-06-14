@@ -36,7 +36,7 @@ public class MainViewBinder {
     private final TextView tvMemoryLoad;
 
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
-    private final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+    private final SimpleDateFormat timeFormat = new SimpleDateFormat("HH : mm : ss", Locale.getDefault());
 
     private final Runnable timeTicker = new Runnable() {
         @Override
@@ -79,34 +79,34 @@ public class MainViewBinder {
         progressBattery.setProgressTintList(
                 ColorStateList.valueOf(ContextCompat.getColor(activity, batteryProgressColorRes(level)))
         );
-        tvCharging.setText("充电状态：" + chargingText(snapshot.isCharging(), level));
-        tvBatteryTemp.setText(String.format(Locale.getDefault(), "电池温度：%.1f ℃", snapshot.getBatteryTempC()));
+        tvCharging.setText(chargingValue(snapshot.isCharging(), level));
+        tvBatteryTemp.setText(String.format(Locale.getDefault(), "%.1f ℃", snapshot.getBatteryTempC()));
     }
 
     @SuppressLint("SetTextI18n")
     public void renderSystemStats(@NonNull SystemStats stats) {
-        tvThermalStatus.setText("系统热状态：" + thermalStatusText(stats.getThermalStatus()));
-        tvBatteryCurrent.setText(String.format(Locale.getDefault(), "电池电流：%.0f mA",
+        tvThermalStatus.setText(thermalStatusText(stats.getThermalStatus()));
+        tvBatteryCurrent.setText(String.format(Locale.getDefault(), "%.0f mA",
                 stats.getBatteryCurrentMa()));
-        tvBatteryVoltage.setText(String.format(Locale.getDefault(), "电池电压：%.0f mV",
+        tvBatteryVoltage.setText(String.format(Locale.getDefault(), "%.0f mV",
                 stats.getBatteryVoltageMv()));
-        tvBatteryPower.setText(String.format(Locale.getDefault(), "瞬时功率：%.0f mW",
+        tvBatteryPower.setText(String.format(Locale.getDefault(), "%.0f mW",
                 stats.getBatteryPowerMw()));
-        tvCpuTemp.setText(String.format(Locale.getDefault(), "CPU温度：%.1f ℃",
+        tvCpuTemp.setText(String.format(Locale.getDefault(), "%.1f ℃",
                 stats.getCpuTemperatureC()));
         if (stats.getCpuFreqMhz() > 0f) {
-            tvCpuFreq.setText(String.format(Locale.getDefault(), "CPU频率：%.0f MHz (%.0f%%)",
+            tvCpuFreq.setText(String.format(Locale.getDefault(), "%.0f MHz (%.0f%%)",
                     stats.getCpuFreqMhz(), stats.getCpuFreqRatio()));
         } else {
-            tvCpuFreq.setText("CPU频率：--");
+            tvCpuFreq.setText("-");
         }
         long memUsed = stats.getMemoryUsedBytes();
         long memTotal = stats.getMemoryTotalBytes();
         if (memTotal > 0L) {
-            tvMemoryLoad.setText(String.format(Locale.getDefault(), "内存占用：%s / %s",
+            tvMemoryLoad.setText(String.format(Locale.getDefault(), "%s / %s",
                     formatMb(memUsed), formatMb(memTotal)));
         } else {
-            tvMemoryLoad.setText("内存占用：--");
+            tvMemoryLoad.setText("-");
         }
     }
 
@@ -121,11 +121,13 @@ public class MainViewBinder {
         return R.color.green_main;
     }
 
-    private static String chargingText(boolean charging, int level) {
+    private static String chargingValue(boolean charging, int level) {
         if (charging) {
             return level == 100 ? "充电已完成" : "充电中";
         }
-        return "未充电";
+        else {
+            return level > 20 ? "未充电" : "电量过低";
+        }
     }
 
     private static String thermalStatusText(int status) {
@@ -146,7 +148,7 @@ public class MainViewBinder {
                 return "即将关机";
             case SystemStats.THERMAL_UNKNOWN:
             default:
-                return "未知";
+                return "Android 10+ 支持";
         }
     }
 

@@ -35,14 +35,6 @@ public class SystemMonitor {
     private Listener listener;
     private boolean monitoring;
 
-    private long prevProcCpuMs;
-    private long prevWallMs;
-    private final int cpuCoreCount = Math.max(1, Runtime.getRuntime().availableProcessors());
-
-    private Boolean procStatAvailable;
-    private long prevSysBusy;
-    private long prevSysTotal;
-
     private long[] cpuMaxFreqKhzCache;
     private int sysfsCpuCount = -1;
 
@@ -133,9 +125,7 @@ public class SystemMonitor {
 
     private float getCpuTemperature() {
         for (String path : CPU_TEMP_PATHS) {
-            BufferedReader reader = null;
-            try {
-                reader = new BufferedReader(new FileReader(path));
+            try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
                 String line = reader.readLine();
                 if (line == null) {
                     continue;
@@ -148,13 +138,6 @@ public class SystemMonitor {
                 }
                 return temp;
             } catch (Exception ignored) {
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (Exception ignored) {
-                    }
-                }
             }
         }
         return 0f;
@@ -192,7 +175,7 @@ public class SystemMonitor {
                 }
             }
         }
-        if (maxRatio < 0f) {
+        if (maxRatio <= 0f) {
             maxRatio = 0f;
         } else if (maxRatio > 1f) {
             maxRatio = 1f;
@@ -214,9 +197,7 @@ public class SystemMonitor {
     }
 
     private static long readCpuFreqKhz(String path) {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(path));
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line = reader.readLine();
             if (line == null) {
                 return -1L;
@@ -224,13 +205,6 @@ public class SystemMonitor {
             return Long.parseLong(line.trim());
         } catch (Exception ignored) {
             return -1L;
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (Exception ignored) {
-                }
-            }
         }
     }
 

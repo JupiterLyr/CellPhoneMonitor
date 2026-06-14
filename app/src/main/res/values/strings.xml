@@ -3,15 +3,23 @@
     <string name="title">设备当前状态</string>
 
     <string name="local_time_format">-- : -- : --</string>
-    <string name="device_condition">设备状态</string>
     <string name="battery_percentage">0%</string>
-    <string name="charger_condition">充电状态：—</string>
-    <string name="charger_temperature">电池温度：— ℃</string>
-    <string name="thermal_status">系统热状态：—</string>
-    <string name="battery_current">电池电流：— mA</string>
-    <string name="battery_voltage">电池电压：— mV</string>
-    <string name="battery_power">瞬时功率：— mW</string>
-    <string name="cpu_temperature">CPU温度：— ℃</string>
-    <string name="cpu_frequency">CPU频率：— MHz (—%)</string>
-    <string name="memory_usage">内存占用：— MB / — MB</string>
+    <string name="charging_status_title">电池状态</string>
+    <string name="battery_temperature_title">电池温度</string>
+    <string name="thermal_status_title">系统热状态</string>
+    <string name="battery_current_title">电池电流</string>
+    <string name="battery_voltage_title">电池电压</string>
+    <string name="battery_power_title">瞬时功率</string>
+    <string name="cpu_temperature_title">CPU温度</string>
+    <string name="cpu_frequency_title">CPU频率</string>
+    <string name="memory_usage_title">内存占用</string>
+    <string name="charger_condition">—</string>
+    <string name="charger_temperature">— ℃</string>
+    <string name="thermal_status">—</string>
+    <string name="battery_current">— mA</string>
+    <string name="battery_voltage">— mV</string>
+    <string name="battery_power">— mW</string>
+    <string name="cpu_temperature">— ℃</string>
+    <string name="cpu_frequency">— MHz (—%)</string>
+    <string name="memory_usage">— MB / — MB</string>
 </resources>

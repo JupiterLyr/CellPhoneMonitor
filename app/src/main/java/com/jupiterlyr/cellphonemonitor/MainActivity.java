@@ -1,12 +1,10 @@
 package com.jupiterlyr.cellphonemonitor;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.jupiterlyr.cellphonemonitor.monitor.BatteryMonitor;
 import com.jupiterlyr.cellphonemonitor.monitor.SystemMonitor;
@@ -42,13 +40,5 @@ public class MainActivity extends AppCompatActivity {
         systemMonitor.stop();
         viewBinder.stopTimeTicker();
         super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        batteryMonitor.stop();
-        systemMonitor.stop();
-        viewBinder.stopTimeTicker();
-        super.onDestroy();
     }
 }
