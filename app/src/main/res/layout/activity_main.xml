@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:layout_gravity="center"
+            android:text="@string/local_time_format"
+            android:textSize="@dimen/text_size_xlarge"
+            android:textStyle="bold"
+            android:textColor="@color/text_main" />
+
+        <!-- 设备状态卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="@color/background_card"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/device_condition"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_main" />
+
+                <TextView
+                    android:id="@+id/tvBattery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/battery_percentage"
+                    android:textSize="@dimen/text_size_xlarge"
+                    android:textColor="@color/text_main"
+                    android:textStyle="bold" />
+
+                <ProgressBar
+                    android:id="@+id/progressBattery"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="8dp"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressBackgroundTint="@color/gray_dark"
+                    android:progressTint="@color/green_main" />
+
+                <TextView
+                    android:id="@+id/tvCharging"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/charger_condition"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+                <TextView
+                    android:id="@+id/tvBatteryTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/charger_temperature"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+                <TextView
+                    android:id="@+id/tvThermalStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/thermal_status"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+                <TextView
+                    android:id="@+id/tvBatteryCurrent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/battery_current"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+                <TextView
+                    android:id="@+id/tvBatteryVoltage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/battery_voltage"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+                <TextView
+                    android:id="@+id/tvBatteryPower"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/battery_power"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+                <TextView
+                    android:id="@+id/tvCpuTemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/cpu_temperature"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+                <TextView
+                    android:id="@+id/tvCpuFreq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/cpu_frequency"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+                <TextView
+                    android:id="@+id/tvMemoryload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/memory_usage"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_description" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
