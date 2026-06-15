@@ -7,6 +7,7 @@ public class SystemStats {
     private final float batteryCurrentMa;
     private final float batteryVoltageMv;
     private final float batteryPowerMw;
+    private final float refreshRateHz;
     private final float cpuTemperatureC;
     private final float cpuFreqMhz;
     private final float cpuFreqRatio;
@@ -17,6 +18,7 @@ public class SystemStats {
     public SystemStats(float batteryCurrentMa,
                        float batteryVoltageMv,
                        float batteryPowerMw,
+                       float refreshRateHz,
                        float cpuTemperatureC,
                        float cpuFreqMhz,
                        float cpuFreqRatio,
@@ -26,6 +28,7 @@ public class SystemStats {
         this.batteryCurrentMa = batteryCurrentMa;
         this.batteryVoltageMv = batteryVoltageMv;
         this.batteryPowerMw = batteryPowerMw;
+        this.refreshRateHz = refreshRateHz;
         this.cpuTemperatureC = cpuTemperatureC;
         this.cpuFreqMhz = cpuFreqMhz;
         this.cpuFreqRatio = cpuFreqRatio;
@@ -44,6 +47,10 @@ public class SystemStats {
 
     public float getBatteryPowerMw() {
         return batteryPowerMw;
+    }
+
+    public float getRefreshRateHz() {
+        return refreshRateHz;
     }
 
     public float getCpuTemperatureC() {

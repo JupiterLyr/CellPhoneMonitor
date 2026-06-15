@@ -40,7 +40,7 @@
                 android:layout_gravity="center"
                 android:text="@string/title"
                 android:textColor="@color/text_main"
-                android:textSize="@dimen/text_size_large"
+                android:textSize="@dimen/text_size_xlarge"
                 android:textStyle="bold" />
 
             <TextView
@@ -100,7 +100,7 @@
                                     android:gravity="center"
                                     android:text="@string/charging_status_title"
                                     android:textColor="@color/text_description"
-                                    android:textSize="@dimen/text_size_medium" />
+                                    android:textSize="@dimen/text_size_small" />
 
                                 <TextView
                                     android:id="@+id/tvCharging"
@@ -353,17 +353,17 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="@string/cpu_temperature_title"
+                                    android:text="@string/screen_refresh_rate"
                                     android:textColor="@color/text_description"
                                     android:textSize="@dimen/text_size_small" />
 
                                 <TextView
-                                    android:id="@+id/tvCpuTemp"
+                                    android:id="@+id/tvRefreshRate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:layout_marginTop="6dp"
-                                    android:text="@string/cpu_temperature"
+                                    android:text="@string/refresh_rate"
                                     android:textColor="@color/text_main"
                                     android:textSize="@dimen/text_size_medium"
                                     android:textStyle="bold" />
@@ -392,23 +392,61 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="@string/cpu_frequency_title"
+                                    android:text="@string/cpu_temperature_title"
                                     android:textColor="@color/text_description"
                                     android:textSize="@dimen/text_size_small" />
 
                                 <TextView
-                                    android:id="@+id/tvCpuFreq"
+                                    android:id="@+id/tvCpuTemp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:layout_marginTop="6dp"
-                                    android:text="@string/cpu_frequency"
+                                    android:text="@string/cpu_temperature"
                                     android:textColor="@color/text_main"
                                     android:textSize="@dimen/text_size_medium"
                                     android:textStyle="bold" />
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
                     </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:cardBackgroundColor="@color/black"
+                        app:cardCornerRadius="18dp"
+                        app:cardElevation="0dp"
+                        app:cardUseCompatPadding="false"
+                        app:strokeColor="@color/gray"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/cpu_frequency_title"
+                                android:textColor="@color/text_description"
+                                android:textSize="@dimen/text_size_small" />
+
+                            <TextView
+                                android:id="@+id/tvCpuFreq"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_marginTop="6dp"
+                                android:text="@string/cpu_frequency"
+                                android:textColor="@color/text_main"
+                                android:textSize="@dimen/text_size_medium"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"

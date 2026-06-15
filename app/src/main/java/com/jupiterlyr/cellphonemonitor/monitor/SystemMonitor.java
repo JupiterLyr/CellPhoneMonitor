@@ -4,11 +4,13 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.hardware.display.DisplayManager;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
+import android.view.Display;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -71,41 +73,37 @@ public class SystemMonitor {
     };
 
     private SystemStats collectSystemStats() {
-        float batteryCurrentUa = getBatteryCurrentUa();
+        float batteryCurrentMa = getBatteryCurrentMa();
         float batteryVoltageMv = getBatteryVoltageMv();
-        float batteryCurrentMa = batteryCurrentUa / 1000f;
         float batteryPowerMw = batteryCurrentMa * batteryVoltageMv / 1000f;
+        float refreshRateHz = getRefreshRateHz();
         float cpuTemperatureC = getCpuTemperature();
-        float cpuFreqMhz = 0f;
-        float cpuFreqRatio = 0f;
+        float[] cpuFreq = getCpuFrequency();
         long[] memory = getMemoryInfo();
         int thermalStatus = getThermalStatus();
-
-        float[] cpuFreq = getCpuFrequency();
-        cpuFreqMhz = cpuFreq[0];
-        cpuFreqRatio = cpuFreq[1];
 
         return new SystemStats(
                 batteryCurrentMa,
                 batteryVoltageMv,
                 batteryPowerMw,
+                refreshRateHz,
                 cpuTemperatureC,
-                cpuFreqMhz,
-                cpuFreqRatio,
+                cpuFreq[0],
+                cpuFreq[1],
                 memory[0],
                 memory[1],
                 thermalStatus
         );
     }
 
-    private float getBatteryCurrentUa() {
+    private float getBatteryCurrentMa() {
         try {
             BatteryManager batteryManager = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
             if (batteryManager == null) {
                 return 0f;
             }
-            long currentUa = batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
-            return currentUa == Long.MIN_VALUE ? 0f : (float) currentUa;
+            long currentMa = batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
+            return currentMa == Long.MIN_VALUE ? 0f : (float) currentMa;
         } catch (Exception ignored) {
             return 0f;
         }
@@ -118,6 +116,23 @@ public class SystemMonitor {
                 return 0f;
             }
             return intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
+        } catch (Exception ignored) {
+            return 0f;
+        }
+    }
+
+    private float getRefreshRateHz() {
+        try {
+            DisplayManager displayManager = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
+            if (displayManager == null) {
+                return 0f;
+            }
+            Display display = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
+            if (display == null) {
+                return 0f;
+            }
+            float refreshRate = display.getRefreshRate();
+            return Math.max(refreshRate, 0f);
         } catch (Exception ignored) {
             return 0f;
         }
@@ -186,8 +201,8 @@ public class SystemMonitor {
     private static int detectSysfsCpuCount() {
         int count = 0;
         for (int i = 0; i < 64; i++) {
-            File f = new File("/sys/devices/system/cpu/cpu" + i + "/cpufreq");
-            if (f.exists()) {
+            File file = new File("/sys/devices/system/cpu/cpu" + i + "/cpufreq");
+            if (file.exists()) {
                 count++;
             } else if (i > 0) {
                 break;

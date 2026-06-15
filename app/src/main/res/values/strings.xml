@@ -10,6 +10,7 @@
     <string name="battery_current_title">电池电流</string>
     <string name="battery_voltage_title">电池电压</string>
     <string name="battery_power_title">瞬时功率</string>
+    <string name="screen_refresh_rate">屏幕刷新率</string>
     <string name="cpu_temperature_title">CPU温度</string>
     <string name="cpu_frequency_title">CPU频率</string>
     <string name="memory_usage_title">内存占用</string>
@@ -19,6 +20,7 @@
     <string name="battery_current">— mA</string>
     <string name="battery_voltage">— mV</string>
     <string name="battery_power">— mW</string>
+    <string name="refresh_rate">— Hz</string>
     <string name="cpu_temperature">— ℃</string>
     <string name="cpu_frequency">— MHz (—%)</string>
     <string name="memory_usage">— MB / — MB</string>

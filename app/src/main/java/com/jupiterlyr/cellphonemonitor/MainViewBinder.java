@@ -31,6 +31,7 @@ public class MainViewBinder {
     private final TextView tvBatteryCurrent;
     private final TextView tvBatteryVoltage;
     private final TextView tvBatteryPower;
+    private final TextView tvRefreshRate;
     private final TextView tvCpuTemp;
     private final TextView tvCpuFreq;
     private final TextView tvMemoryLoad;
@@ -57,6 +58,7 @@ public class MainViewBinder {
         tvBatteryCurrent = activity.findViewById(R.id.tvBatteryCurrent);
         tvBatteryVoltage = activity.findViewById(R.id.tvBatteryVoltage);
         tvBatteryPower = activity.findViewById(R.id.tvBatteryPower);
+        tvRefreshRate = activity.findViewById(R.id.tvRefreshRate);
         tvCpuTemp = activity.findViewById(R.id.tvCpuTemp);
         tvCpuFreq = activity.findViewById(R.id.tvCpuFreq);
         tvMemoryLoad = activity.findViewById(R.id.tvMemoryload);
@@ -86,14 +88,15 @@ public class MainViewBinder {
     @SuppressLint("SetTextI18n")
     public void renderSystemStats(@NonNull SystemStats stats) {
         tvThermalStatus.setText(thermalStatusText(stats.getThermalStatus()));
-        tvBatteryCurrent.setText(String.format(Locale.getDefault(), "%.0f mA",
-                stats.getBatteryCurrentMa()));
-        tvBatteryVoltage.setText(String.format(Locale.getDefault(), "%.0f mV",
-                stats.getBatteryVoltageMv()));
-        tvBatteryPower.setText(String.format(Locale.getDefault(), "%.0f mW",
-                stats.getBatteryPowerMw()));
-        tvCpuTemp.setText(String.format(Locale.getDefault(), "%.1f ℃",
-                stats.getCpuTemperatureC()));
+        tvBatteryCurrent.setText(String.format(Locale.getDefault(), "%.0f mA", stats.getBatteryCurrentMa()));
+        tvBatteryVoltage.setText(String.format(Locale.getDefault(), "%.0f mV", stats.getBatteryVoltageMv()));
+        tvBatteryPower.setText(String.format(Locale.getDefault(), "%.0f mW", stats.getBatteryPowerMw()));
+        if (stats.getRefreshRateHz() > 0f) {
+            tvRefreshRate.setText(String.format(Locale.getDefault(), "%.0f Hz", stats.getRefreshRateHz()));
+        } else {
+            tvRefreshRate.setText("-");
+        }
+        tvCpuTemp.setText(String.format(Locale.getDefault(), "%.1f ℃", stats.getCpuTemperatureC()));
         if (stats.getCpuFreqMhz() > 0f) {
             tvCpuFreq.setText(String.format(Locale.getDefault(), "%.0f MHz (%.0f%%)",
                     stats.getCpuFreqMhz(), stats.getCpuFreqRatio()));
@@ -125,9 +128,7 @@ public class MainViewBinder {
         if (charging) {
             return level == 100 ? "充电已完成" : "充电中";
         }
-        else {
-            return level > 20 ? "未充电" : "电量过低";
-        }
+        return level > 20 ? "未充电" : "电量过低";
     }
 
     private static String thermalStatusText(int status) {
@@ -156,7 +157,7 @@ public class MainViewBinder {
         if (bytes <= 0L) {
             return "0.0 MB";
         }
-        final float MB = 1024f * 1024f;
-        return String.format(Locale.getDefault(), "%.1f MB", bytes / MB);
+        final float mb = 1024f * 1024f;
+        return String.format(Locale.getDefault(), "%.1f MB", bytes / mb);
     }
 }
