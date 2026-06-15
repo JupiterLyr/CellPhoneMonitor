@@ -14,8 +14,8 @@ android {
         applicationId = "com.jupiterlyr.cellphonemonitor"
         minSdk = 28
         targetSdk = 36
-        versionCode = 102
-        versionName = "1.2"
+        versionCode = 10402
+        versionName = "1.4.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

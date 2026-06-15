@@ -7,3 +7,10 @@ An application that can monitor the state of mobile phone battery, CPU and memor
 ## Note
 Individual data cannot be obtained on some devices with Android version lower than 10.</br>
 在 Android 版本低于 10 的部分设备上，个别数据无法获取。
+
+## App Language
+Chinese Simplified | 简体中文
+
+---
+
+*Updated by* **JupiterLyr** *at* 2026-06-16 01:00
