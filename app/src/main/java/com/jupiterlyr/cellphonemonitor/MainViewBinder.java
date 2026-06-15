@@ -88,9 +88,14 @@ public class MainViewBinder {
     @SuppressLint("SetTextI18n")
     public void renderSystemStats(@NonNull SystemStats stats) {
         tvThermalStatus.setText(thermalStatusText(stats.getThermalStatus()));
-        tvBatteryCurrent.setText(String.format(Locale.getDefault(), "%.0f mA", stats.getBatteryCurrentMa()));
+        float batteryCurrent = stats.getBatteryCurrentMa();
+        if (batteryCurrent > 0) {
+            tvBatteryCurrent.setText(String.format(Locale.getDefault(), "%.0f mA (充)", batteryCurrent));
+        } else {
+            tvBatteryCurrent.setText(String.format(Locale.getDefault(), "%.0f mA (放)", Math.abs(batteryCurrent)));
+        }
         tvBatteryVoltage.setText(String.format(Locale.getDefault(), "%.0f mV", stats.getBatteryVoltageMv()));
-        tvBatteryPower.setText(String.format(Locale.getDefault(), "%.0f mW", stats.getBatteryPowerMw()));
+        tvBatteryPower.setText(String.format(Locale.getDefault(), "%.0f mW", Math.abs(stats.getBatteryPowerMw())));
         if (stats.getRefreshRateHz() > 0f) {
             tvRefreshRate.setText(String.format(Locale.getDefault(), "%.0f Hz", stats.getRefreshRateHz()));
         } else {
@@ -101,7 +106,7 @@ public class MainViewBinder {
             tvCpuFreq.setText(String.format(Locale.getDefault(), "%.0f MHz (%.0f%%)",
                     stats.getCpuFreqMhz(), stats.getCpuFreqRatio()));
         } else {
-            tvCpuFreq.setText("-");
+            tvCpuFreq.setText("— MHz (—%)");
         }
         long memUsed = stats.getMemoryUsedBytes();
         long memTotal = stats.getMemoryTotalBytes();
@@ -109,7 +114,7 @@ public class MainViewBinder {
             tvMemoryLoad.setText(String.format(Locale.getDefault(), "%s / %s",
                     formatMb(memUsed), formatMb(memTotal)));
         } else {
-            tvMemoryLoad.setText("-");
+            tvMemoryLoad.setText("— MB / — MB");
         }
     }
 

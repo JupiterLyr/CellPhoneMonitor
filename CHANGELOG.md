@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.4.1]
+### Fixed
+- 在电流和功率的显示逻辑上做了优化，将原先的电流标量改为了标记“充”“放”，功率改为绝对值
+
 ## [1.4.0]
 ### Added
 - 新增屏幕刷新率窗口
